@@ -3,6 +3,7 @@ import { TicketHistoryResolver } from './ticket-history.resolver';
 import { TicketHistoryService } from './ticket-history.service';
 import { JwtAuthGuard } from '../guards/Jwt.guard';
 import { ExecutionContext } from '@nestjs/common';
+import { TicketStatus } from '../types';
 
 describe('TicketHistoryResolver', () => {
   let resolver: TicketHistoryResolver;
@@ -15,8 +16,7 @@ describe('TicketHistoryResolver', () => {
       changeDate: new Date(),
       previousState: {
         title: 'Old Title',
-        description: 'Old Description',
-        status: 'TO_DO',
+        status: TicketStatus.TO_DO,
       },
       changes: {
         title: 'Old Title',

@@ -17,11 +17,10 @@ export class TicketsService {
     @InjectModel(Ticket.name) private ticketModel: Model<Ticket>,
   ) {}
 
-  async createTicket({ title, description, status }: CreateTicketInput) {
+  async createTicket({ title, status }: CreateTicketInput) {
     try {
       const ticket = await this.ticketModel.create({
         title,
-        description,
         status,
       });
       this.eventEmitter.emit(TICKET_UPDATED, {

@@ -18,8 +18,4 @@ export class CreateTicketInput {
   @Field({ description: 'Title of the ticket' })
   @IsNotEmpty({ message: 'Title is required' })
   title: string;
-
-  @Field({ description: 'Description of the ticket' })
-  @IsNotEmpty({ message: 'Description is required' })
-  description: string;
 }

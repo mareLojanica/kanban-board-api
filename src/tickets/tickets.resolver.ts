@@ -28,7 +28,10 @@ export class TicketsResolver {
     })
     searchTicketsInput: SearchTicketsInput,
   ): Promise<Ticket[]> {
-    return this.ticketsService.getTickets(searchTicketsInput?.searchText);
+    const tickets = await this.ticketsService.getTickets(
+      searchTicketsInput?.searchText,
+    );
+    return tickets;
   }
 
   @Mutation(() => Ticket)

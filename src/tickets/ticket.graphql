@@ -9,14 +9,12 @@ enum TicketStatus {
 type Ticket {
   id: ID!
   title: String!
-  description: String!
   status: TicketStatus!
 }
 
 # Input Type for Creating a Ticket
 input CreateTicketInput {
   title: String!
-  description: String!
   status: TicketStatus!
 }
 
@@ -29,7 +27,6 @@ input SearchTicketsInput {
 input UpdateTicketInput {
   id: ID!
   title: String
-  description: String
   status: TicketStatus
 }
 
@@ -40,7 +37,6 @@ type SuccessResponse {
 
 # Query Definitions
 type Query {
-  # Fetch all tickets or search by title/description
   getTickets(searchTicketsInput: SearchTicketsInput): [Ticket!]!
 }
 

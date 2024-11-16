@@ -15,10 +15,6 @@ export class Ticket extends Document {
 
   @Prop({ required: true })
   @Field()
-  description: string;
-
-  @Prop({ required: true })
-  @Field()
   status: TicketStatus;
 }
 

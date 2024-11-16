@@ -25,7 +25,6 @@ describe('TicketsService', () => {
       title: 'Test Ticket',
     }),
 
-    description: 'This is a test ticket',
     status: 'TO_DO',
   };
 
@@ -33,8 +32,7 @@ describe('TicketsService', () => {
     create: jest.fn().mockResolvedValue({
       id: 'mockId',
       title: 'Test',
-      description: 'Test Desc',
-      status: 'TO_DO',
+      status: TicketStatus.TO_DO,
     }),
     find: jest.fn().mockReturnValue({
       exec: jest.fn().mockResolvedValue([mockTicket]),
@@ -79,7 +77,6 @@ describe('TicketsService', () => {
     it('should create a ticket successfully', async () => {
       const createInput = {
         title: 'Test',
-        description: 'Test Desc',
         status: TicketStatus.TO_DO,
       };
 
@@ -89,8 +86,7 @@ describe('TicketsService', () => {
       expect(result).toEqual({
         id: 'mockId',
         title: 'Test',
-        description: 'Test Desc',
-        status: 'TO_DO',
+        status: TicketStatus.TO_DO,
       });
     });
 
@@ -100,14 +96,12 @@ describe('TicketsService', () => {
       await expect(
         service.createTicket({
           title: '',
-          description: '',
           status: TicketStatus.DONE,
         }),
       ).rejects.toThrow(ApolloError);
 
       expect(mockTicketModel.create).toHaveBeenCalledWith({
         title: '',
-        description: '',
         status: TicketStatus.DONE,
       });
     });

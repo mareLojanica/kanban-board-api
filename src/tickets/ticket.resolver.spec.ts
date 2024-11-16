@@ -14,7 +14,6 @@ describe('TicketsResolver', () => {
   const mockTicket = {
     id: '6737b609f83221d26c6573e5',
     title: 'Test Ticket',
-    description: 'This is a test ticket',
     status: TicketStatus.TO_DO,
   };
 
@@ -50,7 +49,6 @@ describe('TicketsResolver', () => {
     it('should create a ticket successfully', async () => {
       const createTicketInput: CreateTicketInput = {
         title: 'Test Ticket',
-        description: 'This is a test ticket',
         status: TicketStatus.TO_DO,
       };
 

@@ -5,7 +5,7 @@ import { TicketHistory } from './schema/ticket-history.schema';
 import { Model } from 'mongoose';
 import { ApolloError } from 'apollo-server-express';
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { TicketHistoryEvent } from '../types';
+import { TicketHistoryEvent, TicketStatus } from '../types';
 
 describe('TicketHistoryService', () => {
   let service: TicketHistoryService;
@@ -20,8 +20,7 @@ describe('TicketHistoryService', () => {
       changeDate: new Date(),
       previousState: {
         title: 'Old Title',
-        description: 'Old Description',
-        status: 'TO_DO',
+        status: TicketStatus.TO_DO,
       },
       changes: {
         title: { oldValue: 'Old Title', newValue: 'New Title' },
@@ -97,8 +96,7 @@ describe('TicketHistoryService', () => {
         },
         previousState: {
           title: 'Old Title',
-          description: 'Old Description',
-          status: 'TO_DO',
+          status: TicketStatus.TO_DO,
         },
         event: TicketHistoryEvent.CREATED,
       };
@@ -126,8 +124,7 @@ describe('TicketHistoryService', () => {
         },
         previousState: {
           title: 'Old Title',
-          description: 'Old Description',
-          status: 'TO_DO',
+          status: TicketStatus.TO_DO,
         },
         event: TicketHistoryEvent.CREATED,
       };
