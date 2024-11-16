@@ -13,7 +13,6 @@ describe('TicketHistoryResolver', () => {
     {
       id: '6737d0f60595faa64ee468ab',
       ticketId: '6737b607f83221d26c6573d1',
-      changeDate: new Date(),
       previousState: {
         title: 'Old Title',
         status: TicketStatus.TO_DO,

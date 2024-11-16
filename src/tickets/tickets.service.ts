@@ -27,7 +27,6 @@ export class TicketsService {
         ticketId: ticket.id,
         previousState: {},
         changes: {},
-        event: TicketHistoryEvent.CREATED,
       });
       return ticket;
     } catch (error) {
@@ -83,7 +82,6 @@ export class TicketsService {
           ticketId: id,
           previousState,
           changes,
-          event: TicketHistoryEvent.UPDATED,
         });
       }
 

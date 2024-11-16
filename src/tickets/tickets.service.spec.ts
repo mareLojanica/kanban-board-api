@@ -150,7 +150,6 @@ describe('TicketsService', () => {
             newValue: 'Updated Title',
           },
         ],
-        event: TicketHistoryEvent.UPDATED,
       });
 
       expect(result).toEqual({

@@ -6,7 +6,7 @@ import { Ticket } from 'src/tickets/schema/tickets.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { TicketUpdatedEventDto } from './dto/update-ticket-history.input';
-import { TicketHistoryEvent } from 'src/types';
+import { TicketHistoryEvent } from '../types';
 
 @Injectable()
 export class TicketHistoryService {
@@ -38,9 +38,7 @@ export class TicketHistoryService {
     try {
       await this.ticketHistoryModel.create({
         ticketId,
-        changeDate: new Date(),
         changes,
-        event: TicketHistoryEvent.UPDATED,
         previousState,
       });
     } catch (error) {

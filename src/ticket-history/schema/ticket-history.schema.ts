@@ -1,12 +1,7 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { Field, ObjectType, ID, registerEnumType } from '@nestjs/graphql';
+import { Field, ObjectType, ID } from '@nestjs/graphql';
 import { Ticket } from '../../tickets/schema/tickets.schema';
-import { TicketHistoryEvent } from '../../types';
-
-registerEnumType(TicketHistoryEvent, {
-  name: 'TicketHistoryEvent',
-});
 
 @ObjectType()
 @Schema({ timestamps: true })
@@ -18,10 +13,6 @@ export class TicketHistory extends Document {
   @Field()
   ticketId: string;
 
-  @Prop({ required: true })
-  @Field()
-  changeDate: Date;
-
   @Prop({ type: Object, required: true })
   @Field(() => Ticket)
   previousState: Partial<Ticket>;
@@ -29,10 +20,6 @@ export class TicketHistory extends Document {
   @Prop({ type: [Object], required: true })
   @Field(() => [Change], { nullable: true })
   changes: Change[];
-
-  @Prop({ required: true, enum: TicketHistoryEvent })
-  @Field(() => TicketHistoryEvent)
-  event: TicketHistoryEvent;
 }
 
 @ObjectType()

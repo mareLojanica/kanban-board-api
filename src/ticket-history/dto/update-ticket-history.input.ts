@@ -1,5 +1,4 @@
-import { IsString, IsObject, IsNotEmpty, IsEnum } from 'class-validator';
-import { TicketHistoryEvent } from '../../types';
+import { IsString, IsObject, IsNotEmpty } from 'class-validator';
 
 export class TicketUpdatedEventDto {
   @IsString()
@@ -13,8 +12,4 @@ export class TicketUpdatedEventDto {
   @IsObject()
   @IsNotEmpty()
   changes: Record<string, any>;
-
-  @IsEnum(TicketHistoryEvent)
-  @IsNotEmpty()
-  event: TicketHistoryEvent;
 }

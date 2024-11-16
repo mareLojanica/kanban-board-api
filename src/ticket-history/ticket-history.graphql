@@ -20,10 +20,8 @@ type Ticket {
 type TicketHistory {
   id: ID!
   ticketId: ID!
-  changeDate: String!
   previousState: Ticket
   changes: [Change!]
-  event: TicketHistoryEvent!
 }
 
 type Query {
