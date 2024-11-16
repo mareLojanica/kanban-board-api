@@ -1,0 +1,8 @@
+type JwtResponse {
+  accessToken: String!
+}
+
+type Mutation {
+  # Perform login and return a JWT token
+  login: JwtResponse!
+}

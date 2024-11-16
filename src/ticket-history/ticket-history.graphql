@@ -1,0 +1,32 @@
+enum TicketHistoryEvent {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+type Change {
+  field: String!
+  oldValue: String
+  newValue: String
+}
+
+type Ticket {
+  id: ID!
+  status: String
+  title: String
+  # Add other fields from the Ticket schema here
+}
+
+type TicketHistory {
+  id: ID!
+  ticketId: ID!
+  changeDate: String!
+  previousState: Ticket
+  changes: [Change!]
+  event: TicketHistoryEvent!
+}
+
+type Query {
+  # Retrieves the history for a specific ticket
+  findHistoryPerTicket(id: ID!): [TicketHistory!]!
+}
