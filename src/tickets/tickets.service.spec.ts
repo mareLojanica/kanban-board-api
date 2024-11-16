@@ -5,7 +5,8 @@ import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Ticket } from './schema/tickets.schema';
 import { Model } from 'mongoose';
 import { ApolloError } from 'apollo-server-express';
-import { TicketStatus } from '../types';
+import { TicketHistoryEvent, TicketStatus } from '../types';
+import { TICKET_UPDATED } from '../utils/constants';
 
 describe('TicketsService', () => {
   let service: TicketsService;
@@ -142,7 +143,7 @@ describe('TicketsService', () => {
 
       expect(mockTicketModel.findById).toHaveBeenCalledWith(updateInput.id);
       expect(mockTicket.save).toHaveBeenCalled();
-      expect(eventEmitter.emit).toHaveBeenCalledWith('ticket.updated', {
+      expect(eventEmitter.emit).toHaveBeenCalledWith(TICKET_UPDATED, {
         ticketId: '6737b607f83221d26c6573d1',
         previousState: {
           id: '6737b607f83221d26c6573d1',
@@ -155,7 +156,9 @@ describe('TicketsService', () => {
             newValue: 'Updated Title',
           },
         ],
+        event: TicketHistoryEvent.UPDATED,
       });
+
       expect(result).toEqual({
         id: '6737b607f83221d26c6573d1',
         title: 'Updated Title',

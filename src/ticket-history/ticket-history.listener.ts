@@ -2,21 +2,19 @@ import { Injectable } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
 import { TicketHistoryService } from './ticket-history.service';
 import { Ticket } from 'src/tickets/schema/tickets.schema';
+import { TICKET_DELETED, TICKET_UPDATED } from '../utils/constants';
+import { TicketUpdatedEventDto } from './dto/update-ticket-history.input';
 
 @Injectable()
 export class TicketHistoryListener {
   constructor(private readonly ticketHistoryService: TicketHistoryService) {}
 
-  @OnEvent('ticket.updated')
-  async handleTicketUpdatedEvent(event: {
-    ticketId: string;
-    previousState: Record<string, any>;
-    changes: Record<string, any>;
-  }) {
+  @OnEvent(TICKET_UPDATED)
+  async handleTicketUpdatedEvent(event: TicketUpdatedEventDto) {
     return this.ticketHistoryService.createHistory(event);
   }
 
-  @OnEvent('ticket.deleted')
+  @OnEvent(TICKET_DELETED)
   async handleDeleteHistory(event: { ticketId: Pick<Ticket, 'id'> }) {
     return this.ticketHistoryService.deleteHistory(event.ticketId);
   }

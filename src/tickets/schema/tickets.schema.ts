@@ -4,7 +4,7 @@ import { Document } from 'mongoose';
 import { TicketStatus } from '../../types';
 
 @ObjectType()
-@Schema()
+@Schema({ timestamps: true })
 export class Ticket extends Document {
   @Field(() => ID)
   id: string;

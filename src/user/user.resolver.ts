@@ -5,6 +5,7 @@ import { UpdateUserInput } from './dto/update-user.input';
 import { SuccessResponse } from '../utils/delete.envelope.response';
 import { JwtAuthGuard } from '../guards/Jwt.guard';
 import { UseGuards } from '@nestjs/common';
+import { CreateUserInput } from './dto/create-user.input';
 
 @Resolver(() => User)
 @UseGuards(JwtAuthGuard)
@@ -18,10 +19,9 @@ export class UserResolver {
 
   @Mutation(() => User)
   async createUser(
-    @Args('name') name: string,
-    @Args('email') email: string,
+    @Args('createUserInput') createUserInput: CreateUserInput,
   ): Promise<User> {
-    return this.userService.createUser({ name, email });
+    return this.userService.createUser(createUserInput);
   }
 
   @Mutation(() => User)

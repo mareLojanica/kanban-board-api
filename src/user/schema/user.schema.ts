@@ -3,7 +3,7 @@ import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
 @ObjectType()
-@Schema()
+@Schema({ timestamps: true })
 export class User extends Document {
   @Field(() => ID)
   id: string;

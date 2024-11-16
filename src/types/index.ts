@@ -3,3 +3,8 @@ export enum TicketStatus {
   IN_PROGRESS = 'In Progress',
   DONE = 'Done',
 }
+
+export enum TicketHistoryEvent {
+  CREATED = 'CREATED',
+  UPDATED = 'UPDATED',
+}

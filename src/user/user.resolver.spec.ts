@@ -56,7 +56,7 @@ describe('UserResolver', () => {
       const name = 'Test User';
       const email = 'test@example.com';
 
-      const result = await resolver.createUser(name, email);
+      const result = await resolver.createUser({ name, email });
 
       expect(service.createUser).toHaveBeenCalledWith({ name, email });
       expect(result).toEqual(mockUser);

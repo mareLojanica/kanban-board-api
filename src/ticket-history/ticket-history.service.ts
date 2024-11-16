@@ -5,6 +5,7 @@ import { ApolloError } from 'apollo-server-express';
 import { Ticket } from 'src/tickets/schema/tickets.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+import { TicketUpdatedEventDto } from './dto/update-ticket-history.input';
 
 @Injectable()
 export class TicketHistoryService {
@@ -32,11 +33,7 @@ export class TicketHistoryService {
     ticketId,
     changes,
     previousState,
-  }: {
-    ticketId: string;
-    previousState: Record<string, any>;
-    changes: Record<string, any>;
-  }) {
+  }: TicketUpdatedEventDto) {
     try {
       await this.ticketHistoryModel.create({
         ticketId,

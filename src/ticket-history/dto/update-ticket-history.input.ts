@@ -1,8 +1,20 @@
-import { CreateTicketHistoryInput } from './create-ticket-history.input';
-import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
+import { IsString, IsObject, IsNotEmpty, IsEnum } from 'class-validator';
+import { TicketHistoryEvent } from '../../types';
 
-@InputType()
-export class UpdateTicketHistoryInput extends PartialType(CreateTicketHistoryInput) {
-  @Field(() => Int)
-  id: number;
+export class TicketUpdatedEventDto {
+  @IsString()
+  @IsNotEmpty()
+  ticketId: string;
+
+  @IsObject()
+  @IsNotEmpty()
+  previousState: Record<string, any>;
+
+  @IsObject()
+  @IsNotEmpty()
+  changes: Record<string, any>;
+
+  @IsEnum(TicketHistoryEvent)
+  @IsNotEmpty()
+  event: TicketHistoryEvent;
 }

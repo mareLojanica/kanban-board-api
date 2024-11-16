@@ -7,6 +7,8 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { SuccessResponse } from '../utils/delete.envelope.response';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+import { TICKET_DELETED, TICKET_UPDATED } from '../utils/constants';
+import { TicketHistoryEvent } from '../types';
 
 @Injectable()
 export class TicketsService {
@@ -21,6 +23,12 @@ export class TicketsService {
         title,
         description,
         status,
+      });
+      this.eventEmitter.emit(TICKET_UPDATED, {
+        ticketId: ticket.id,
+        previousState: {},
+        changes: {},
+        event: TicketHistoryEvent.CREATED,
       });
       return ticket;
     } catch (error) {
@@ -72,10 +80,11 @@ export class TicketsService {
       const updatedTicket = await existingTicket.save();
 
       if (Object.keys(changes).length) {
-        this.eventEmitter.emit('ticket.updated', {
+        this.eventEmitter.emit(TICKET_UPDATED, {
           ticketId: id,
           previousState,
           changes,
+          event: TicketHistoryEvent.UPDATED,
         });
       }
 
@@ -94,7 +103,7 @@ export class TicketsService {
       if (!deletedTicket) {
         throw new ApolloError('Ticket not found', 'TICKET_NOT_FOUND');
       }
-      this.eventEmitter.emit('ticket.deleted', {
+      this.eventEmitter.emit(TICKET_DELETED, {
         ticketId: id,
       });
       return { success: true };

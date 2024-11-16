@@ -5,6 +5,7 @@ import { TicketHistory } from './schema/ticket-history.schema';
 import { Model } from 'mongoose';
 import { ApolloError } from 'apollo-server-express';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+import { TicketHistoryEvent } from '../types';
 
 describe('TicketHistoryService', () => {
   let service: TicketHistoryService;
@@ -99,6 +100,7 @@ describe('TicketHistoryService', () => {
           description: 'Old Description',
           status: 'TO_DO',
         },
+        event: TicketHistoryEvent.CREATED,
       };
 
       const result = await service.createHistory(historyInput);
@@ -127,6 +129,7 @@ describe('TicketHistoryService', () => {
           description: 'Old Description',
           status: 'TO_DO',
         },
+        event: TicketHistoryEvent.CREATED,
       };
 
       await expect(service.createHistory(historyInput)).rejects.toThrow(
