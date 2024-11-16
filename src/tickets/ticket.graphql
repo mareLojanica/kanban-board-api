@@ -1,0 +1,57 @@
+# Enum for Ticket Status
+enum TicketStatus {
+  TO_DO
+  IN_PROGRESS
+  DONE
+}
+
+# Ticket Type Definition
+type Ticket {
+  id: ID!
+  title: String!
+  description: String!
+  status: TicketStatus!
+}
+
+# Input Type for Creating a Ticket
+input CreateTicketInput {
+  title: String!
+  description: String!
+  status: TicketStatus!
+}
+
+# Input Type for Searching Tickets
+input SearchTicketsInput {
+  searchText: String
+}
+
+# Input Type for Updating a Ticket
+input UpdateTicketInput {
+  id: ID!
+  title: String
+  description: String
+  status: TicketStatus
+}
+
+# Response Type for Success
+type SuccessResponse {
+  success: Boolean!
+}
+
+# Query Definitions
+type Query {
+  # Fetch all tickets or search by title/description
+  getTickets(searchTicketsInput: SearchTicketsInput): [Ticket!]!
+}
+
+# Mutation Definitions
+type Mutation {
+  # Create a new ticket
+  createTicket(createTicketInput: CreateTicketInput!): Ticket!
+
+  # Update an existing ticket
+  updateTicket(updateTicketInput: UpdateTicketInput!): Ticket!
+
+  # Delete a ticket by ID
+  deleteTicket(id: ID!): SuccessResponse!
+}

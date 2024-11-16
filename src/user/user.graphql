@@ -1,0 +1,42 @@
+# User Type Definition
+type User {
+  id: ID!
+  name: String!
+  email: String!
+}
+
+# Input Type for Creating a User
+input CreateUserInput {
+  name: String!
+  email: String!
+}
+
+# Input Type for Updating a User
+input UpdateUserInput {
+  id: ID!
+  name: String
+  email: String
+}
+
+# Response Type for Delete Operation
+type SuccessResponse {
+  success: Boolean!
+}
+
+# Queries for Retrieving Users
+type Query {
+  # Get all users
+  getUsers: [User!]!
+}
+
+# Mutations for Creating, Updating, and Deleting Users
+type Mutation {
+  # Create a new user
+  createUser(name: String!, email: String!): User!
+
+  # Update an existing user
+  updateUser(updateUserInput: UpdateUserInput!): User!
+
+  # Delete a user by ID
+  deleteUser(id: ID!): SuccessResponse!
+}
