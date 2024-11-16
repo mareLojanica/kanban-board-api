@@ -1,7 +1,7 @@
 export enum TicketStatus {
-  TO_DO = 'To Do',
-  IN_PROGRESS = 'In Progress',
-  DONE = 'Done',
+  TO_DO = 'TO_DO',
+  IN_PROGRESS = 'IN_PROGRESS',
+  DONE = 'DONE',
 }
 
 export enum TicketHistoryEvent {

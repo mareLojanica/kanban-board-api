@@ -50,7 +50,7 @@ describe('UserService', () => {
   describe('createUser', () => {
     it('should create a new user', async () => {
       const createUserInput = { name: 'Test User', email: 'test@example.com' };
-      mockUserModel.findOne.mockResolvedValueOnce(null); // No existing user
+      mockUserModel.findOne.mockResolvedValueOnce(null);
       mockUserModel.create.mockResolvedValueOnce(mockUser);
 
       const result = await service.createUser(createUserInput);

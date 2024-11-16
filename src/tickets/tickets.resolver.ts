@@ -15,7 +15,7 @@ export class TicketsResolver {
 
   @Mutation(() => Ticket)
   async createTicket(
-    @Args('createTicketInput') createTicketInput: CreateTicketInput, // Corrected argument name
+    @Args('createTicketInput') createTicketInput: CreateTicketInput,
   ): Promise<Ticket> {
     return this.ticketsService.createTicket(createTicketInput);
   }
